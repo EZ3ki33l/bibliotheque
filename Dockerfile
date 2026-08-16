@@ -1,5 +1,8 @@
 FROM node:22-alpine AS base
 
+# pnpm 11: allowBuilds n'est appliqué en Docker que si CI=true (pas de TTY).
+ENV CI=true
+
 RUN apk add --no-cache \
         libc6-compat \
         openssl \

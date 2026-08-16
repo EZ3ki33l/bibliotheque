@@ -10,7 +10,7 @@ services:
     volumes:
       - bibliotheque_postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     healthcheck:
       test:
         [
@@ -55,7 +55,7 @@ services:
       HOSTNAME: 0.0.0.0
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?schema=public
     expose:
-      - "3000"
+      - "127.0.0.1:3003:3000"
     depends_on:
       db:
         condition: service_healthy
@@ -78,5 +78,5 @@ networks:
     name: bibliotheque_db_access
 
   proxy:
-    name: proxy
+    name: docker_proxy
     external: true

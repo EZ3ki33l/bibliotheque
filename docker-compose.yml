@@ -54,7 +54,7 @@ services:
       PORT: 3000
       HOSTNAME: 0.0.0.0
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?schema=public
-    expose:
+    ports:
       - "127.0.0.1:3003:3000"
     depends_on:
       db:

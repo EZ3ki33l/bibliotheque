@@ -9,8 +9,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:up": "docker compose up db -d",
-    "docker:up": "docker compose up -d --build",
+    "db:migrate": "prisma migrate deploy",
+    "docker:up": "docker compose up -d db && docker compose run --rm migrate && docker compose up -d app",
     "docker:down": "docker compose down"
   },
   "dependencies": {

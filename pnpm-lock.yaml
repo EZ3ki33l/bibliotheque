@@ -44,6 +44,9 @@ importers:
       '@react-aria/utils':
         specifier: ^3.34.1
         version: 3.34.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@swc/helpers':
+        specifier: ^0.5.23
+        version: 0.5.23
       ai:
         specifier: ^7.0.66
         version: 7.0.66(zod@4.4.3)

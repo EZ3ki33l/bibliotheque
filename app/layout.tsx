@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import { Toast } from "@heroui/react";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,14 +26,30 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="fr-FR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col justify-between mx-24">
-        <Toast.Provider/>
+      <body className="mx-24 flex h-full flex-col">
+        <Toast.Provider placement="top" />
         <NuqsAdapter>
-          <header className="flex pt-3 justify-center items-center">
-            <p>Navigation à venir</p>
-            </header>
-            <main className="flex-1 py-12">{children}</main>
-            <footer className="flex pb-3 justify-center items-center">Tous droits réservés</footer></NuqsAdapter>
+          <header className="flex items-center justify-end pt-3">
+            <div className="flex gap-4">
+              <Link
+                href={"/register"}
+                className="flex items-center justify-center rounded-full bg-amber-300 p-2 text-white"
+              >
+                <button className="">S'enregistrer</button>
+              </Link>
+              <Link
+                href={"/login"}
+                className="flex items-center justify-center rounded-full bg-amber-900 p-2 text-white"
+              >
+                <button>Se connecter</button>
+              </Link>
+            </div>
+          </header>
+          <main className="flex flex-1 flex-col py-12">{children}</main>
+          <footer className="flex items-center justify-center pb-3">
+            Tous droits réservés
+          </footer>
+        </NuqsAdapter>
       </body>
     </html>
   );

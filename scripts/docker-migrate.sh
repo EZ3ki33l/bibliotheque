@@ -1,8 +1,11 @@
 #!/bin/sh
-set -e
+set -eu
 
-if [ -f prisma/migrations/migration_lock.toml ]; then
-  pnpm exec prisma migrate deploy
-else
-  echo "Aucune migration Prisma pour le moment, skip."
-fi
+echo "Attente de PostgreSQL..."
+
+until pnpm exec prisma migrate deploy; do
+  echo "PostgreSQL ou Prisma n'est pas encore prêt, nouvel essai dans 3 secondes..."
+  sleep 3
+done
+
+echo "Migrations Prisma terminées."

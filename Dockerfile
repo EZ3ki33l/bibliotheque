@@ -1,15 +1,17 @@
 FROM node:22-alpine AS base
 
-RUN apk add --no-cache libc6-compat openssl \
+RUN apk add --no-cache \
+        libc6-compat \
+        openssl \
     && corepack enable \
-    && corepack prepare pnpm@9.15.0 --activate
+    && corepack prepare pnpm@11.22.0 --activate
 
 WORKDIR /app
 
 
 FROM base AS deps
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install --frozen-lockfile
 
@@ -18,8 +20,6 @@ FROM base AS builder
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-RUN mkdir -p public
 
 ENV DATABASE_URL=postgresql://build:build@localhost:5432/build
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -31,7 +31,8 @@ RUN pnpm build
 FROM base AS migrator
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml prisma.config.ts ./
+COPY package.json pnpm-lock.yaml ./
+COPY prisma.config.ts ./
 COPY prisma ./prisma
 COPY scripts/docker-migrate.sh ./scripts/docker-migrate.sh
 

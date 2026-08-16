@@ -9,6 +9,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "db:up": "sh scripts/docker-dev.sh up -d",
+    "db:down": "sh scripts/docker-dev.sh down",
     "db:migrate": "prisma migrate deploy",
     "docker:up": "docker compose up -d db && docker compose run --rm migrate && docker compose up -d app",
     "docker:down": "docker compose down"
@@ -28,6 +30,7 @@
     "@react-aria/utils": "^3.34.1",
     "@swc/helpers": "^0.5.23",
     "ai": "^7.0.66",
+    "bcryptjs": "^3.0.3",
     "better-auth": "^1.6.29",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",

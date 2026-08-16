@@ -1,0 +1,5 @@
+allowBuilds:
+  '@prisma/engines': true
+  es5-ext: false
+  prisma: true
+  unrs-resolver: true

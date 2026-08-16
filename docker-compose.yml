@@ -40,7 +40,7 @@ services:
       - internal
     restart: "no"
 
-    app:
+  app:
     container_name: bibliotheque-app
     build:
       context: .

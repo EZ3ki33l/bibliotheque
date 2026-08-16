@@ -23,6 +23,7 @@ FROM base AS builder
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN mkdir -p public
 
 ENV DATABASE_URL=postgresql://build:build@localhost:5432/build
 ENV NEXT_TELEMETRY_DISABLED=1

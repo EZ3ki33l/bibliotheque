@@ -17,6 +17,25 @@ enum AdminRole {
   SUPER_ADMIN
 }
 
+enum EntryKind {
+  FUNCTION
+  COMPONENT
+  CONCEPT
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum ReviewRating {
+  AGAIN
+  HARD
+  GOOD
+  EASY
+}
+
 model User {
   id            String    @id @default(uuid())
   name          String
@@ -28,6 +47,8 @@ model User {
   admin         Admin?
   sessions      Session[]
   accounts      Account[]
+  reviewCards ReviewCard[]
+  quizAttemps QuizAttemps[]
 
   @@map("user")
 }
@@ -87,4 +108,30 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Stack {
+  id String @id @default(uuid())
+  name String
+  slug String @unique
+  description String @default("")
+  position Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  categories Category[]
+}
+
+model Category {
+  id String @id @default(uuid())
+  stackId String
+  stack Stack @relation(fields: [stackId], references: [id], onDelete: Cascade)
+  slug String
+  description String @default("")
+  position Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  entries Entry[]
+
+  @@unique([stackId, slug])
+  @@index([stackId])
 }

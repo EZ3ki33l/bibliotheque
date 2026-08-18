@@ -1,16 +1,16 @@
-# Graph Report - bibliotheque  (2026-08-17)
+# Graph Report - bibliotheque  (2026-08-16)
 
 ## Corpus Check
-- 133 files · ~44,241 words
+- 126 files · ~42,817 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1284 nodes · 1209 edges · 145 communities (109 shown, 36 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.81)
+- 1254 nodes · 1153 edges · 144 communities (108 shown, 36 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `00d77e14`
+- Built from commit: `3905fe2a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,14 +22,15 @@
 - Driver Adapters
 - Upgrade to Prisma ORM 7
 - dependencies
-- Prisma Compute Config
+- app/layout.tsx
 - @ai-sdk/openai-compatible
 - clsx
 - @codesandbox/sandpack-react
 - eslint.config.mjs
-- SDK and API Automation
+- @heroui/react
 - @heroui/styles
 - @hookform/resolvers
+- monaco-editor
 - @monaco-editor/react
 - next
 - next.config.ts
@@ -44,7 +45,7 @@
 - @react-aria/utils
 - react-dom
 - Removed Features
-- bcryptjs
+- rehype-pretty-code
 - Prisma CLI Reference
 - shiki
 - tailwind-variants
@@ -100,14 +101,11 @@
 - console-and-connections
 - management-api-sdk
 - prisma migrate status
-- next-mdx-remote
-- react-hook-form
 - migrations-mapping
 - schema-contract-mapping
 - Prisma MongoDB Upgrade Path
 - endpoints
 - prisma mcp
-- remark-gfm
 - client-api-mapping
 - Service Tokens
 - prisma debug
@@ -124,7 +122,8 @@
 - @prisma/client
 - @swc/helpers
 - docker-migrate.sh
-- (auth)/actions.ts
+- [...all]/route.ts
+- login/page.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `Troubleshooting Prisma Compute` - 22 edges
@@ -145,10 +144,6 @@
   README.md → AGENTS.md
 - `pnpm` --conceptually_related_to--> `allowBuilds`  [INFERRED]
   README.md → pnpm-workspace.yaml
-- `RegisterPage()` --indirect_call--> `signUp()`  [INFERRED]
-  app/(auth)/register/page.tsx → app/(auth)/actions.ts
-- `LoginPage()` --indirect_call--> `signIn()`  [INFERRED]
-  app/(auth)/login/page.tsx → app/(auth)/actions.ts
 
 ## Import Cycles
 - None detected.
@@ -158,7 +153,7 @@
 - **Next.js Learn More Resources** — readme_nextjs_documentation, readme_learn_nextjs, readme_nextjs_github [EXTRACTED 1.00]
 - **pnpm allowBuilds Packages** — pnpm_workspace_allowbuilds, pnpm_workspace_es5_ext, pnpm_workspace_unrs_resolver [EXTRACTED 1.00]
 
-## Communities (145 total, 36 thin omitted)
+## Communities (144 total, 36 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.05
@@ -186,15 +181,11 @@ Nodes (25): 1. Update package.json for ESM-first projects, 2. Update tsconfig.js
 
 ### Community 6 - "dependencies"
 Cohesion: 0.22
-Nodes (9): ai, @heroui/react, monaco-editor, dependencies, ai, @heroui/react, monaco-editor, rehype-pretty-code (+1 more)
+Nodes (9): ai, next-mdx-remote, dependencies, ai, next-mdx-remote, react-hook-form, remark-gfm, react-hook-form (+1 more)
 
-### Community 7 - "Prisma Compute Config"
-Cohesion: 0.22
-Nodes (9): App Fields, Basic Shape, Database Scope, File Names and Discovery, Generating a Config with `init`, Monorepos and Multi-App Repos, Precedence, Prisma Compute Config (+1 more)
-
-### Community 13 - "SDK and API Automation"
-Cohesion: 0.25
-Nodes (8): Compute SDK, Management API Concepts, Prefer the CLI for App Workflows, Regions, Repository-snapshot detection, SDK and API Automation, SDK Build Strategies, Secrets and Redaction
+### Community 7 - "app/layout.tsx"
+Cohesion: 0.40
+Nodes (3): geistMono, geistSans, metadata
 
 ### Community 20 - "Relation Queries"
 Cohesion: 0.08
@@ -309,8 +300,8 @@ Cohesion: 0.13
 Nodes (14): Error Handling, Prerequisites, Prisma Postgres Setup, Reference Files, Step 1: Authenticate, Step 2: List available regions, Step 3: Create a project with a database, Step 4: Create a named connection (optional) (+6 more)
 
 ### Community 64 - "Prisma Compute Framework Readiness"
-Cohesion: 0.08
-Nodes (23): Addon Notes, Basic Commands, create-prisma Compute Flow, Failure Handling, Generated Deploy Script, Generated Files to Preserve, PostgreSQL and Database Behavior, Reference (+15 more)
+Cohesion: 0.14
+Nodes (14): Astro, Bun, Elysia, and Plain Source Servers, CLI-First Model, CLI Matrix, Custom Build Artifacts, Hono, NestJS, Next.js (+6 more)
 
 ### Community 65 - "MongoDB Setup"
 Cohesion: 0.14
@@ -329,8 +320,8 @@ Cohesion: 0.15
 Nodes (12): Command, Configuration, Current Option Surface, Examples, Execute from file, Execute from stdin, Execute `migrate diff` output, Limitations (+4 more)
 
 ### Community 69 - "Prisma Platform CLI App Deploy"
-Cohesion: 0.15
-Nodes (13): Agent Skill Installation, Auth and Project Binding, Build and Run Locally, Database and Env, Deploy, Deployment Story: GitHub vs CLI, Operations, Output Handling (+5 more)
+Cohesion: 0.05
+Nodes (39): Agent Skill Installation, Auth and Project Binding, Build and Run Locally, Database and Env, Deploy, Deployment Story: GitHub vs CLI, Operations, Output Handling (+31 more)
 
 ### Community 70 - "MySQL Setup"
 Cohesion: 0.15
@@ -452,22 +443,24 @@ Nodes (6): Basic instantiation, Common mistakes, Key rules, Prisma 7 Client Inst
 Cohesion: 0.50
 Nodes (3): AI safety checkpoint for destructive commands, Reference, Required workflow
 
-### Community 128 - "(auth)/actions.ts"
-Cohesion: 0.07
-Nodes (32): { GET, POST }, AuthState, signIn(), signUp(), LoginPage(), RegisterPage(), signInSchema, signUpSchema (+24 more)
+### Community 128 - "login/page.tsx"
+Cohesion: 0.31
+Nodes (3): ConnexionButton(), ConnexionButtonProps, authClient
 
 ## Knowledge Gaps
-- **874 isolated node(s):** `AuthState`, `{ GET, POST }`, `geistSans`, `geistMono`, `metadata` (+869 more)
+- **863 isolated node(s):** `{ GET, POST }`, `geistSans`, `geistMono`, `metadata`, `ConnexionButtonProps` (+858 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `dependencies` connect `dependencies` to `devDependencies`, `@ai-sdk/openai-compatible`, `clsx`, `@codesandbox/sandpack-react`, `@heroui/styles`, `@hookform/resolvers`, `@monaco-editor/react`, `next`, `nuqs`, `@phosphor-icons/react`, `react`, `react-aria`, `react-aria-components`, `@react-aria/i18n`, `@react-aria/ssr`, `@react-aria/utils`, `react-dom`, `bcryptjs`, `shiki`, `tailwind-variants`, `zod`, `next-mdx-remote`, `react-hook-form`, `remark-gfm`, `better-auth`, `dotenv`, `pg`, `@prisma/adapter-pg`, `@prisma/client`, `@swc/helpers`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `AuthState`, `{ GET, POST }`, `geistSans` to the rest of the system?**
-  _874 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `dependencies` connect `dependencies` to `devDependencies`, `@ai-sdk/openai-compatible`, `clsx`, `@codesandbox/sandpack-react`, `@heroui/react`, `@heroui/styles`, `@hookform/resolvers`, `monaco-editor`, `@monaco-editor/react`, `next`, `nuqs`, `@phosphor-icons/react`, `react`, `react-aria`, `react-aria-components`, `@react-aria/i18n`, `@react-aria/ssr`, `@react-aria/utils`, `react-dom`, `rehype-pretty-code`, `shiki`, `tailwind-variants`, `zod`, `better-auth`, `dotenv`, `pg`, `@prisma/adapter-pg`, `@prisma/client`, `@swc/helpers`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+- **Why does `Troubleshooting Prisma Compute` connect `Troubleshooting Prisma Compute` to `Prisma Platform CLI App Deploy`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **What connects `{ GET, POST }`, `geistSans`, `geistMono` to the rest of the system?**
+  _863 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
@@ -475,6 +468,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Next.js` be split into smaller, more focused modules?**
   _Cohesion score 0.09881422924901186 - nodes in this community are weakly interconnected._
 - **Should `Model Queries` be split into smaller, more focused modules?**
-  _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
-- **Should `Driver Adapters` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._

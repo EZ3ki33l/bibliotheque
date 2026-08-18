@@ -16,9 +16,11 @@ export default function LoginPage() {
 
   return (
     <form action={action} className="flex flex-col">
-      <h1 className="mb-6 text-2xl font-semibold tracking-tight">Connexion</h1>
+      <h1 className="mb-6 text-center text-2xl font-semibold tracking-tight">
+        Connexion
+      </h1>
 
-      <div className="invisible pointer-events-none" aria-hidden>
+      <div className="pointer-events-none invisible" aria-hidden>
         <AuthField label="Nom" tabIndex={-1} />
       </div>
 

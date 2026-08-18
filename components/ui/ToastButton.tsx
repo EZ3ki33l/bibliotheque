@@ -4,6 +4,16 @@ import { Button, toast } from "@heroui/react";
 import { HandWavingIcon } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { authClient } from "@/lib/auth-client";
+
+async function enterApp(
+  router: ReturnType<typeof useRouter>,
+  refetch: () => Promise<void>,
+) {
+  await refetch();
+  router.push("/admin");
+  router.refresh();
+}
 
 type ConnexionButtonProps = {
   userName?: string;
@@ -11,6 +21,7 @@ type ConnexionButtonProps = {
 
 export function ConnexionButton({ userName }: ConnexionButtonProps) {
   const router = useRouter();
+  const { refetch } = authClient.useSession();
   const hasWelcomed = useRef(false);
 
   useEffect(() => {
@@ -19,8 +30,8 @@ export function ConnexionButton({ userName }: ConnexionButtonProps) {
     toast.success(`Bonjour, bienvenue parmi nous ${userName} !`, {
       indicator: <HandWavingIcon size={20} weight="fill" />,
     });
-    router.push("/admin");
-  }, [userName, router]);
+    void enterApp(router, refetch);
+  }, [userName, router, refetch]);
 
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
@@ -37,6 +48,7 @@ type RegisteredButtonProps = {
 
 export function RegisteredButton({ userName }: RegisteredButtonProps) {
   const router = useRouter();
+  const { refetch } = authClient.useSession();
   const hasRegistered = useRef(false);
 
   useEffect(() => {
@@ -45,8 +57,8 @@ export function RegisteredButton({ userName }: RegisteredButtonProps) {
     toast.success(`Compte créé, bienvenue ${userName}`, {
       indicator: <HandWavingIcon size={20} weight="fill" />,
     });
-    router.push("/admin");
-  }, [userName, router]);
+    void enterApp(router, refetch);
+  }, [userName, router, refetch]);
 
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">

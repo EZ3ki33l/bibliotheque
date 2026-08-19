@@ -85,7 +85,13 @@ function NavSection({
   );
 }
 
-export function AppSidebar({ user }: { user: SidebarUser }) {
+export function AppSidebar({
+  user,
+  isAdmin,
+}: {
+  user: SidebarUser;
+  isAdmin: boolean;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
@@ -99,8 +105,14 @@ export function AppSidebar({ user }: { user: SidebarUser }) {
       </Link>
 
       <nav className="flex flex-1 flex-col gap-5">
-        <NavSection title="Bibliothèque" items={LIBRARY_NAV} pathname={pathname} />
-        <NavSection title="Admin" items={ADMIN_NAV} pathname={pathname} />
+        <NavSection
+          title="Bibliothèque"
+          items={LIBRARY_NAV}
+          pathname={pathname}
+        />
+        {isAdmin && currentUser ? (
+          <NavSection title="Admin" items={ADMIN_NAV} pathname={pathname} />
+        ) : null}
       </nav>
 
       <div className="mt-auto border-t border-white/8 pt-3">
@@ -111,8 +123,12 @@ export function AppSidebar({ user }: { user: SidebarUser }) {
             <div className="flex items-center gap-3 px-2 py-1">
               <Avatar name={currentUser.name} email={currentUser.email} />
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium">{currentUser.name}</p>
-                <p className="truncate text-xs text-zinc-500">{currentUser.email}</p>
+                <p className="truncate text-sm font-medium">
+                  {currentUser.name}
+                </p>
+                <p className="truncate text-xs text-zinc-500">
+                  {currentUser.email}
+                </p>
               </div>
             </div>
             <Button

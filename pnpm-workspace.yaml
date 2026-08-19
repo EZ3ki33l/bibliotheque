@@ -1,8 +1,9 @@
 verifyDepsBeforeRun: false
 
 allowBuilds:
-  '@prisma/client': true
-  '@prisma/engines': true
+  "@prisma/client": true
+  "@prisma/engines": true
   es5-ext: false
+  esbuild: true
   prisma: true
   unrs-resolver: true

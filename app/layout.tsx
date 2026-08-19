@@ -6,6 +6,7 @@ import "./globals.css";
 import { Toast } from "@heroui/react";
 import { AppSidebar } from "@/components/layout/AppSideBar";
 import { auth } from "@/lib/auth";
+import { getAdminForUser } from "@/lib/admin";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  const admin = await getAdminForUser(session?.user?.id);
 
   return (
     <html
@@ -41,7 +43,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <Toast.Provider placement="top" />
         <NuqsAdapter>
           <div className="flex h-full">
-            <AppSidebar user={session?.user ?? null} />
+            <AppSidebar user={session?.user ?? null} isAdmin={Boolean(admin)} />
             <main className="min-w-0 flex-1 overflow-y-auto">
               <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-6 py-8">
                 {children}

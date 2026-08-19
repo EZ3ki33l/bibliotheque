@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { signInSchema, signUpSchema } from "./schema";
 import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export type AuthState = {
   error?: string;
@@ -32,6 +33,7 @@ export async function signUp(
     if (!result?.user) {
       return { error: "Impossible de créer le compte" };
     }
+    revalidatePath("/", "layout");
     return { userName: result.user.name };
   } catch (error) {
     return {
@@ -61,6 +63,7 @@ export async function signIn(
       body: parsed.data,
       headers: await headers(),
     });
+    revalidatePath("/", "layout");
     return { userName: result.user.name };
   } catch {
     return { error: "Email ou mot de passe incorrect" };
